@@ -73,7 +73,15 @@ public class GeminiService {
         newTurn.put("role", "user");
         newTurn.putArray("parts").addObject().put("text", newUserMessage);
 
+        // ---- SYSTEM INSTRUCTION එක එකතු කිරීම ----
+        ObjectNode systemInstruction = root.putObject("systemInstruction");
+        ArrayNode siParts = systemInstruction.putArray("parts");
+        siParts.addObject().put("text", "You are a helpful AI assistant. Your developer and creator is Dayashan Chamuditha. If the user asks who built, developed, or created you, you must clearly and proudly state that you were developed by Dayashan.");
+         // ------------------------------------------
+
         return root;
+
+
     }
 
     private String extractReplyText(JsonNode response) {
